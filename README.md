@@ -1,109 +1,88 @@
-# Deep Learning Transfer Learning with VGG16
+# Deep Learning Transfer Learning
 
-A portfolio project demonstrating **transfer learning, feature extraction, and selective fine-tuning** with VGG16 across two computer-vision tasks.
+A portfolio repository demonstrating **transfer learning, feature extraction, fine-tuning, and pretrained-model inference** across multiple computer-vision tasks and architectures.
+
+The projects progress from task-specific image classification using VGG16 to transfer learning with MobileNetV2 and pretrained ImageNet inference with ResNet50.
 
 ## Projects
 
 ### 01 — Cats vs Dogs
-Binary image classification using:
-- VGG16 pretrained on ImageNet
+
+Binary image classification using **VGG16 pretrained on ImageNet**.
+
 - Feature extraction with a frozen convolutional base
 - Selective fine-tuning from `block5_conv1`
+- Comparison of feature extraction and fine-tuning workflows
+
+**Architecture:** VGG16  
+**Task:** Binary image classification
+
+---
 
 ### 02 — Emotion Detection
-Seven-class facial emotion classification using FER2013:
-- VGG16 feature extraction
+
+Seven-class facial emotion classification using **FER2013** and VGG16.
+
+- Feature extraction using pretrained VGG16
 - Selective fine-tuning from `block5_conv1`
+- Multi-class facial emotion classification
+
+**Architecture:** VGG16  
+**Dataset:** FER2013  
+**Task:** 7-class image classification
+
+---
+
+### 03 — MobileNetV2 ImageNet Transfer Learning
+
+Multi-class mammal image classification using **MobileNetV2 pretrained on ImageNet**.
+
+- Transfer learning using ImageNet pretrained weights
+- Classification across 45 mammal categories
+- Partial fine-tuning of the pretrained network
+- Evaluation using training and validation performance
+
+**Architecture:** MobileNetV2  
+**Dataset:** 45-class mammal image dataset  
+**Task:** Multi-class image classification
+
+---
+
+### 04 — ResNet50 ImageNet Inference
+
+Pretrained image classification using **ResNet50 with ImageNet weights**.
+
+- Loads a pretrained ResNet50 model
+- Applies the required image preprocessing
+- Generates ImageNet predictions
+- Displays the top-3 predicted classes and confidence scores
+
+**Architecture:** ResNet50  
+**Dataset:** ImageNet  
+**Task:** Pretrained image classification inference
+
+> This project demonstrates pretrained-model inference rather than custom training or fine-tuning.
+
+---
 
 ## Project Structure
 
 ```text
 deep-learning-transfer-learning/
+│
 ├── 01_cats_vs_dogs/
 │   ├── 01_feature_extraction.ipynb
 │   └── 02_fine_tuning.ipynb
+│
 ├── 02_emotion_detection/
 │   ├── 01_feature_extraction.ipynb
 │   └── 02_fine_tuning.ipynb
+│
+├── 03_mobilenetv2_imagenet/
+│   └── 01_transfer_learning.ipynb
+│
+├── 04_resnet50_imagenet/
+│   └── 01_pretrained_inference.ipynb
+│
 ├── requirements.txt
 └── README.md
-```
-
-## Methodology
-
-```text
-                 VGG16
-                   │
-        ImageNet pretrained weights
-                   │
-          ┌────────┴────────┐
-          │                 │
-   Feature Extraction    Fine-Tuning
-   Freeze backbone       Unfreeze deeper layers
-          │                 │
-     ┌────┴────┐       ┌────┴────┐
-     │         │       │         │
- Cats/Dogs  Emotion  Cats/Dogs  Emotion
-```
-
-## Training Configuration
-
-For quick, reproducible portfolio demonstrations:
-
-- Image size: `150 × 150`
-- Batch size: `32`
-- Epochs: **2**
-- Backbone: VGG16
-- Pretrained weights: ImageNet
-- Feature extraction: frozen convolutional base
-- Fine-tuning: layers from `block5_conv1` onward
-
-> The 2-epoch setting is intentionally lightweight. Increase `EPOCHS` when running a full experiment.
-
-## Dataset Setup
-
-The datasets are **not included in this repository**.
-
-### Cats vs Dogs
-
-The notebooks expect:
-
-```text
-dogsvscats_dataset/
-├── train/
-│   ├── cats/
-│   └── dogs/
-└── test/
-    ├── cats/
-    └── dogs/
-```
-
-### FER2013
-
-The emotion notebooks expect:
-
-```text
-fer2013_dataset/
-├── train/
-│   ├── angry/
-   ...
-└── test/
-    ├── angry/
-    ...
-```
-
-The notebooks contain optional Kaggle/Colab download commands. Configure Kaggle credentials separately before using them.
-
-## Why Two Approaches?
-
-**Feature extraction** provides a fast baseline by keeping pretrained visual features fixed.
-
-**Fine-tuning** allows deeper pretrained layers to adapt to the target dataset. Comparing the two approaches helps demonstrate how transfer learning can be progressively adapted to a new computer-vision problem.
-
-## Technologies
-
-Python • TensorFlow • Keras • VGG16 • NumPy • Matplotlib • Transfer Learning • Computer Vision
-
-## Portfolio Note
-
-These notebooks are structured as reproducible learning/portfolio experiments. Results may vary with dataset versions, hardware, TensorFlow versions, random seeds, and training duration.
